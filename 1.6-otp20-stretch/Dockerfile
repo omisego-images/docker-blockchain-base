@@ -31,7 +31,7 @@ RUN set -xe && \
 
 # populus-required stuff
 RUN set -xe && \
-    apt-get install python python-dev python-pip libssl-dev && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1 && \
-    pip install populus && \
-    populus
+    apt-get install -y python3 python3-dev python3-pip libssl-dev && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
+    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
+    pip install populus
