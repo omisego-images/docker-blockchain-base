@@ -14,8 +14,8 @@ RUN set -xe && \
     rm golang-bin.tar.gz && \
     go version
 
-# NOTE: fixed version 1.7.3 for now
-ENV GETH_VERSION="v1.7.3"
+# NOTE: fixed version 1.8.6 for now
+ENV GETH_VERSION="v1.8.6"
 
 # geth
 # NOTE: getting from ppa doesn't work, so building from source
