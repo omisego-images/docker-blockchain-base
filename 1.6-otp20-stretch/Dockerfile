@@ -28,3 +28,10 @@ RUN set -xe && \
     git checkout FETCH_HEAD && \
     make geth && \
     geth version
+
+# populus-required stuff
+RUN set -xe && \
+    apt-get install python python-dev python-pip libssl-dev && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1 && \
+    pip install populus && \
+    populus
