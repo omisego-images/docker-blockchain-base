@@ -1,4 +1,4 @@
-FROM omisegoimages/elixir:1.6-otp20-stretch
+FROM omisegoimages/jenkins-slave-elixir:1.6-otp20
 MAINTAINER Kridsada Thanabulpong <sirn@omise.co>
 
 ENV GETHPATH="/go-ethereum"
