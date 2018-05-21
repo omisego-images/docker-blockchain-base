@@ -5,6 +5,11 @@ ENV GETHPATH="/go-ethereum"
 ENV PATH="${GETHPATH}/build/bin/:/usr/local/go/bin:${PATH}"
 ENV GOLANG_VERSION="1.9.2"
 
+# user to run external programms (including go-ethereum)
+RUN set -xe && \
+    groupadd -r geth && \
+    useradd -r -g geth geth
+
 RUN set -xe && \
     GOLANG_DOWNLOAD_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz" && \
     GOLANG_DOWNLOAD_SHA256="de874549d9a8d8d8062be05808509c09a88a248e77ec14eb77453530829ac02b" && \
@@ -35,3 +40,8 @@ RUN set -xe && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
     pip install populus
+
+# `sudo` is required by erlexec if omisego node is running under root.
+# Erlexec uses sudo to run external programs with reduced privileges.
+RUN set -xe && \
+    apt-get install -y sudo
