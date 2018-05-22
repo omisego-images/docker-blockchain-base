@@ -2,13 +2,12 @@ FROM omisegoimages/jenkins-slave-elixir:1.6-otp20
 MAINTAINER Kridsada Thanabulpong <sirn@omise.co>
 
 ENV GETHPATH="/go-ethereum"
-ENV PATH="${GETHPATH}/build/bin/:/usr/local/go/bin:${PATH}"
+ENV PATH="/usr/local/go/bin:${PATH}"
 ENV GOLANG_VERSION="1.9.2"
 
 # user to run external programms (including go-ethereum)
 RUN set -xe && \
-    groupadd -r geth && \
-    useradd -r -g geth geth
+    useradd -m -g root geth
 
 RUN set -xe && \
     GOLANG_DOWNLOAD_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz" && \
@@ -32,6 +31,7 @@ RUN set -xe && \
     git fetch --depth 1 origin "${GETH_VERSION}" && \
     git checkout FETCH_HEAD && \
     make geth && \
+    install "${GETHPATH}/build/bin/geth" /usr/local/bin && \
     geth version
 
 # populus-required stuff
