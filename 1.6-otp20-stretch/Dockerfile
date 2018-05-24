@@ -45,3 +45,12 @@ RUN set -xe && \
 # Erlexec uses sudo to run external programs with reduced privileges.
 RUN set -xe && \
     apt-get install -y sudo
+
+# libsecp256k1 required stuff
+RUN set -xe && \
+    apt-get install -y libgmp3-dev
+
+USER jenkins
+
+RUN set -xe && \
+    mix do local.hex --force, local.rebar --force
