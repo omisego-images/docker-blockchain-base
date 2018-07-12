@@ -47,7 +47,7 @@ RUN set -xe && \
     git clone --recursive https://github.com/ethereum/solidity.git && \
     cd solidity && \
     git submodule update --init --recursive && \
-    ./scripts/install_deps.sh && \
+    apt-get -y install build-essential cmake g++ gcc libboost-all-dev unzip libz3-dev && \
     ./scripts/build.sh && \
     solc --version
 
