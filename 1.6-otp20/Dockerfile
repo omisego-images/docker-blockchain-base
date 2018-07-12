@@ -41,4 +41,14 @@ RUN set -xe && \
 RUN set -xe && \
     apt-get install -y libgmp3-dev
 
+# solidity compiler
+
+RUN set -xe && \
+    git clone --recursive https://github.com/ethereum/solidity.git && \
+    cd solidity && \
+    git submodule update --init --recursive && \
+    ./scripts/install_deps.sh && \
+    ./scripts/build.sh && \
+    solc --version
+
 USER jenkins
