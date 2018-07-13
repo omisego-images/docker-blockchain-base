@@ -30,6 +30,16 @@ RUN set -xe && \
     install "${GETHPATH}/build/bin/geth" /usr/local/bin && \
     geth version
 
+# solidity compiler
+
+RUN set -xe && \
+    git clone --recursive https://github.com/ethereum/solidity.git && \
+    cd solidity && \
+    git submodule update --init --recursive && \
+    apt-get -y install cmake libboost-all-dev libz3-dev && \
+    ./scripts/build.sh && \
+    solc --version
+
 # populus-required stuff
 RUN set -xe && \
     apt-get install -y python3 python3-dev python3-pip libssl-dev && \
@@ -40,15 +50,5 @@ RUN set -xe && \
 # libsecp256k1 required stuff
 RUN set -xe && \
     apt-get install -y libgmp3-dev
-
-# solidity compiler
-
-RUN set -xe && \
-    git clone --recursive https://github.com/ethereum/solidity.git && \
-    cd solidity && \
-    git submodule update --init --recursive && \
-    apt-get -y install build-essential cmake g++ gcc libboost-all-dev unzip libz3-dev && \
-    ./scripts/build.sh && \
-    solc --version
 
 USER jenkins
