@@ -37,6 +37,7 @@ RUN set -xe && \
     cd solidity && \
     git submodule update --init --recursive && \
     apt-get -y install cmake libboost-all-dev libz3-dev && \
+    git checkout v0.4.24 && \
     ./scripts/build.sh && \
     solc --version
 
@@ -45,7 +46,8 @@ RUN set -xe && \
     apt-get install -y python3 python3-dev python3-pip libssl-dev && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
-    pip install populus
+    wget https://gist.githubusercontent.com/paulperegud/50e3e397529bfa4ad8d14b98ce4e8dba/raw/d31a5415d31e75c53183208a396165c8eca59a85/requirements.txt && \
+    pip install -r requirements.txt
 
 # libsecp256k1 required stuff
 RUN set -xe && \
