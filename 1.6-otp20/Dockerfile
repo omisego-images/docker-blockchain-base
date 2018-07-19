@@ -37,10 +37,11 @@ RUN set -xe && \
     cd solidity && \
     git submodule update --init --recursive && \
     apt-get -y install cmake libboost-all-dev libz3-dev && \
+    git checkout v0.4.24 && \
     ./scripts/build.sh && \
     solc --version
 
-# populus-required stuff
+# populus-required stuff (populus itself is installed to install its non-python deps)
 RUN set -xe && \
     apt-get install -y python3 python3-dev python3-pip libssl-dev && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
