@@ -37,7 +37,7 @@ RUN set -xe && \
     cd solidity && \
     git submodule update --init --recursive && \
     apt-get -y install cmake libboost-all-dev libz3-dev && \
-    git checkout v0.4.24 && \
+    git checkout v0.4.25 && \
     ./scripts/build.sh && \
     solc --version
 
